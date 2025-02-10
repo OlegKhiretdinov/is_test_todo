@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { Loader } from "../Loader/Loader";
-import { seminarsListRequest } from "../../api/request";
-import { ListItem } from "../ListItem/ListItem";
-import { TSeminar } from "../Seminar/seminar.types";
 import { SeminarListItem } from "../Seminar/SeminarListItem/SeminarListItem";
+import { seminarsListRequest } from "../../api/request";
+import { TSeminar } from "../Seminar/seminar.types";
 
 export function List() {
   const [isLoading, setIsLoading] = useState<boolean>();
@@ -13,7 +12,7 @@ export function List() {
     const fetchData = async () => {
       setIsLoading(true);
 
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      // await new Promise((resolve) => setTimeout(resolve, 1000));
 
       const data = await seminarsListRequest();
       setList(data);
@@ -27,17 +26,7 @@ export function List() {
   ) : (
     <div>
       {list.map((item) => (
-        <ListItem
-          key={item.id}
-          deleteHandler={() => {
-            console.log(item.id);
-          }}
-          editHandler={() => {
-            console.log(item.id);
-          }}
-        >
-          <SeminarListItem {...item} />
-        </ListItem>
+        <SeminarListItem {...item} key={item.id} />
       ))}
     </div>
   );
