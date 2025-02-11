@@ -34,7 +34,7 @@ export const SeminarModal: FC<TSeminarModal> = (props) => {
         setHasError(true)
       })
       .finally(() => {setIsLoading(false)})
-    }, [])
+    }, [id, reloadData])
     
 
   return (

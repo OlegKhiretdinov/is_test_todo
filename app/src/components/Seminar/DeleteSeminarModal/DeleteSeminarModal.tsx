@@ -21,7 +21,7 @@ export const DeleteSeminarModal: FC<TDeleteSeminarModal> = (props) => {
         setHasError(true)
       })
       .finally(() => {setIsLoading(false)})
-  }, [])
+  }, [id, reloadData])
 
   return (
     <Modal closeHandler={closeHandler} title="Удаление">
