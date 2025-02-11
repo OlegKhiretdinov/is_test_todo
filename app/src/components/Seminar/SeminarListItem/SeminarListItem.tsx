@@ -11,6 +11,8 @@ import {
   TModalState,
 } from "./SeminarListItem.types";
 
+// useReducer для управления состоянием открытого модального окна. 
+// модалка может быть или на удаление или на просмотр/редактирование 
 const modalReducer = (state: TModalState, action: TModalAction) => {
   const { type } = action;
   switch (type) {
@@ -25,7 +27,7 @@ const modalReducer = (state: TModalState, action: TModalAction) => {
   }
 };
 
-export const SeminarListItem: FC<TSeminar & { reloadData: () => Promise<void>} > = (props) => {
+export const SeminarListItem: FC<TSeminar & { reloadData: () => Promise<void>}> = (props) => {
   const { id, title, date, time, reloadData } = props;
   const [modalStore, modalDispatch] = useReducer(modalReducer, {
     modal: EModalType.hide,

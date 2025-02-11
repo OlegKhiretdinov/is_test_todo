@@ -23,7 +23,7 @@ export const SeminarModal: FC<TSeminarModal> = (props) => {
       photo: formData.get("photo"),
     }
 
-    setIsLoading(true)
+    setIsLoading(true) // для блокировки кнопок во время запроса
     editSeminarRequest(data as TSeminarModal)
     .then(data => {
       if(data?.status === 200) {

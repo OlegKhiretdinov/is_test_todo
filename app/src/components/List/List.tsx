@@ -10,9 +10,6 @@ export function List() {
 
   const reloadData = useCallback(async () => {
       setIsLoading(true);
-
-      // await new Promise((resolve) => setTimeout(resolve, 1000));
-
       const data = await seminarsListRequest();
       setList(data);
       setIsLoading(false); 
