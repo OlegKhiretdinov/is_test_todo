@@ -21,6 +21,7 @@ export const SeminarModal: FC<TSeminarModal> = (props) => {
       time: formData.get("time"),
       photo: formData.get("photo"),
     }
+
     editSeminarRequest(data as TSeminarModal)
     .then(data => {
       if(data?.status === 200) {
