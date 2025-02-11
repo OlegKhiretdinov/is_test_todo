@@ -4,9 +4,19 @@
   padding: 10px;
 }
 
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .footer {
   margin-top: 10px;
   button {
     margin-right: 10px;
   }
+}
+
+.error {
+  color: red
 }

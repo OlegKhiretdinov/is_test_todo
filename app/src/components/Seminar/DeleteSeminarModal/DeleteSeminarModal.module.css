@@ -10,3 +10,7 @@
   background: rgb(255, 0, 0);
   margin-right: 10px;
 }
+
+.error {
+  color: red
+}

@@ -1,3 +1,5 @@
+import { TSeminar } from "../components/Seminar/seminar.types";
+
 const baseUrl = "http://localhost:3001/seminars";
 
 export const seminarsListRequest = async () => {
@@ -8,19 +10,15 @@ export const seminarsListRequest = async () => {
   return data.json();
 };
 
-export const deleteSeminar = async (id: string) => {
-  const data = await fetch(`${baseUrl}/${id}`, {
+export const deleteSeminarRequest = async (id: string) => {
+  return await fetch(`${baseUrl}/${id}`, {
     method: "DELETE",
   });
-
-  return data.json();
 };
 
-export const editSeminar = async () => {
-  const data = await fetch(baseUrl, {
+export const editSeminarRequest = async ({id, ...rest}: TSeminar) => {
+  return await fetch(`${baseUrl}/${id}`, {
     method: "PUT",
-    body: JSON.stringify({}),
+    body: JSON.stringify(rest),
   });
-
-  return data.json();
 };

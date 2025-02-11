@@ -25,8 +25,8 @@ const modalReducer = (state: TModalState, action: TModalAction) => {
   }
 };
 
-export const SeminarListItem: FC<TSeminar> = (props) => {
-  const { id, title, date, time } = props;
+export const SeminarListItem: FC<TSeminar & { reloadData: () => Promise<void>} > = (props) => {
+  const { id, title, date, time, reloadData } = props;
   const [modalStore, modalDispatch] = useReducer(modalReducer, {
     modal: EModalType.hide,
     isEdit: false,
@@ -77,6 +77,7 @@ export const SeminarListItem: FC<TSeminar> = (props) => {
           closeHandler={closeInfoModalHandler}
           title={title}
           id={id}
+          reloadData={reloadData}
         />
       ) : null}
     </>
