@@ -9,6 +9,7 @@ export const SeminarModal: FC<TSeminarModal> = (props) => {
   const { id, title, date, description, photo, time, closeHandler, editable, reloadData } =
     props;
   const [hasError, setHasError] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   const submitHadler = useCallback((e: FormEvent) => {
     e.preventDefault()
@@ -22,6 +23,7 @@ export const SeminarModal: FC<TSeminarModal> = (props) => {
       photo: formData.get("photo"),
     }
 
+    setIsLoading(true)
     editSeminarRequest(data as TSeminarModal)
     .then(data => {
       if(data?.status === 200) {
@@ -31,6 +33,7 @@ export const SeminarModal: FC<TSeminarModal> = (props) => {
       }}).catch(() => {
         setHasError(true)
       })
+      .finally(() => {setIsLoading(false)})
     }, [])
     
 
@@ -44,11 +47,15 @@ export const SeminarModal: FC<TSeminarModal> = (props) => {
           <input name="date" disabled={!editable} defaultValue={date} />
           <input name="photo" disabled={!editable} defaultValue={photo} />
         </form>
+        
         {hasError ? <p className={cls.error}>Не удалось отредактировать</p> : null}
+        
         {editable ? (
           <footer className={cls.footer}>
-            {hasError ? null : <button type="submit" form="seminar">Сохранить</button>}
-            <button onClick={closeHandler}>{hasError ? "Закрыть" : "Отмена"}</button>
+            {hasError ? null : <button disabled={isLoading} type="submit" form="seminar">Сохранить</button>}
+            <button disabled={isLoading} onClick={closeHandler}>
+              {hasError ? "Закрыть" : "Отмена"}
+            </button>
           </footer>
         ) : null}
       </div>
